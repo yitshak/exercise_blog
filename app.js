@@ -65,8 +65,14 @@ app.post("/compose", function(req,res){
     title : req.body.title,
     body : req.body.post_body
   });
-  post.save()
-  res.redirect("/");
+  post.save(function(err){
+    if (err){
+      console.log(err);
+    }
+    else {
+      res.redirect("/");
+    }
+  })
 })
 
 app.get("/posts/:postName",function(req,res){
